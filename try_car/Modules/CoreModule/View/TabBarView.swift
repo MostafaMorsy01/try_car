@@ -12,23 +12,24 @@ struct TabBarView: View {
     @State private var selection = 0
     var body: some View {
         TabView(selection: $selection){
-                  CoreDataSampleView()
-                    .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                       .tabItem {
-                           Image(systemName: "square.and.pencil")
-                           Text("Post")
-                       }
-                       .tag(0)
-                   Text("Search")
-                       .tabItem {
-                           Image(systemName: "heart.circle")
-                           Text("Favourite")
-                       }
-                       .tag(1)
-                 
-               }
-               .accentColor(.purple)
-               .edgesIgnoringSafeArea(.top)
+            PostsView()
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .tabItem {
+                    Image(systemName: "square.and.pencil")
+                    Text("Post")
+                }
+                .tag(0)
+            FavouriteView()
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .tabItem {
+                    Image(systemName: "heart.circle")
+                    Text("Favourite")
+                }
+                .tag(1)
+            
+        }
+        .accentColor(.purple)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

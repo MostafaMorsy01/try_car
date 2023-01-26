@@ -14,9 +14,13 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = Posts(context: viewContext)
+            newItem.id = UUID()
         }
+//        for _ in 0..<10 {
+//            let newItem = Posts(context: viewContext)
+//            newItem.title = "title"
+//        }
         do {
             try viewContext.save()
         } catch {
@@ -48,7 +52,7 @@ struct PersistenceController {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                fatalError("Unresolved error \(error), \(error.localizedDescription)")
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
